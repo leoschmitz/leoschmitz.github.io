@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<section class="gallery">
+  <div class="card-grid">
+    {% for post in site.posts %}
+      <article class="card">
+        {% if post.image %}
+          <a class="card-media" href="{{ post.url | relative_url }}">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+          </a>
+        {% else %}
+          <a class="card-media media-{{ forloop.index0 | modulo: 6 }}" href="{{ post.url | relative_url }}" aria-hidden="true"></a>
+        {% endif %}
+        <div class="card-body">
+          {% if post.categories.size > 0 %}
+            <span class="card-category">{{ post.categories | first | capitalize }}</span>
+          {% endif %}
+          <h2 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          {% if post.excerpt %}
+            <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+          {% endif %}
+          <time class="card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if site.posts.size == 0 %}
+    <div class="empty-state">
+      <svg class="empty-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 4.5 5 11 5 11h4s5-6.5 5-11c0-3.87-3.13-7-7-7z" fill="#2dd4bf"/>
+        <circle cx="12" cy="9" r="2.6" fill="#ffffff"/>
+      </svg>
+      <h1>Nothing here yet</h1>
+      <p>
+        This space is ready for game reviews and more. Add your first post to
+        <code>_posts/</code> as <code>YYYY-MM-DD-title.markdown</code> and it will
+        appear here as a card.
+      </p>
+      <a class="btn" href="{{ '/about/' | relative_url }}">About Me</a>
+    </div>
+  {% endif %}
+</section>
