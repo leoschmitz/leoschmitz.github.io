@@ -10,13 +10,13 @@
 <meta property="og:image" content="isosurfaces.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <nav class="top">
   <div class="wrap">
-    <a class="home" href="./">Leonardo Schmitz</a>
+    <a class="home" href="./"><span class="mark">LS</span><span class="name">Leonardo Schmitz</span></a>
     <a class="tab" href="./" aria-current="page">About</a>
     <a class="tab" href="research.html">Research</a>
   </div>
@@ -24,87 +24,111 @@
 <div class="wrap">
 
   <header>
-    <p class="eyebrow">Staff Software Engineer · Pinterest</p>
+    <p class="eyebrow">Staff Software Engineer at Pinterest</p>
     <h1>Leonardo Schmitz</h1>
     <p class="lede">
       Staff Software Engineer with deep experience leading development of internal systems.
-      I started out in computer graphics research, making geometry algorithms run fast on GPUs,
-      and moved on to building production systems.
+      Before that I worked on projects for Walmart and Terra, and did GPU graphics research.
     </p>
     <div class="actions">
       <a class="btn primary" href="https://www.linkedin.com/in/leonardoschmitz/">LinkedIn</a>
       <a class="btn" href="https://github.com/leoschmitz">GitHub</a>
-      <a class="btn" href="research.html">Research</a>
     </div>
   </header>
 
-  <section>
-    <h2>Selected work</h2>
-    <div class="timeline">
-      <div class="row">
-        <div class="when">Now</div>
-        <div>
-          <h3>Pinterest</h3>
-          <p>Staff Software Engineer.</p>
-        </div>
+  <div class="board">
+
+    <a class="pin" href="https://www.linkedin.com/in/leonardoschmitz/">
+      <div class="tile c1 tall">
+        <span class="kicker">Now</span>
+        <span class="big">Pinterest</span>
+        <h3>Staff Software Engineer</h3>
+        <p>Leading development of internal systems.</p>
       </div>
-      <div class="row">
-        <div class="when">2012–2013</div>
-        <div>
-          <h3>Walmart · Food Safety</h3>
-          <p>Food safety project, with Bruno Meybom Pospichil, Fernando Coelho and Fausto Richetti Blanco.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="when">2011–2012</div>
-        <div>
-          <h3>Terra · Subscriber platform</h3>
-          <p>SUAT, Terra's unified subscriber system, and the integration that sends subscriber email through a third-party web service.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="when">Since 2009</div>
-        <div>
-          <h3>Visualitica · TraderOne</h3>
-          <p>Co-created TraderOne with André Spritzer and Rodrigo Barni.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="when">2006–2009</div>
-        <div>
-          <h3>UFRGS · Computer Graphics Group</h3>
-          <p>MSc in Computer Science. GPU isosurface extraction, published in Computer Graphics Forum. <a href="research.html">See the research →</a></p>
-        </div>
+      <div class="caption"><b>Current role</b><span>Pinterest · San Francisco Bay Area</span></div>
+    </a>
+
+    <div class="pin">
+      <div class="tile c6">
+        <span class="kicker">What I do</span>
+        <h3>More than 15 years building software, from GPU research to production systems at scale.</h3>
       </div>
     </div>
-  </section>
 
-  <section>
-    <h2>Recognition</h2>
-    <div class="two-col">
-      <div class="card">
-        <h3>SIBGRAPI best papers</h3>
-        <p>One of three computer graphics papers selected and invited to Computer Graphics Forum.</p>
+    <div class="pin">
+      <div class="tile c2">
+        <span class="kicker">2012 – 2013</span>
+        <span class="big">Walmart</span>
+        <h3>Food Safety</h3>
+        <p>With Bruno Meybom Pospichil, Fernando Coelho and Fausto Richetti Blanco.</p>
       </div>
-      <div class="card">
+      <div class="caption"><b>Walmart · Food Safety</b><span>Project</span></div>
+    </div>
+
+    <div class="pin">
+      <div class="tile c3">
+        <span class="kicker">2012</span>
+        <h3>Terra email platform</h3>
+        <p>Integrated Terra's subscriber base with a third-party web service for sending subscriber email.</p>
+      </div>
+      <div class="caption"><b>Terra · Sending Email Platform</b><span>Jan – Mar 2012</span></div>
+    </div>
+
+    <div class="pin">
+      <div class="tile c3 tall">
+        <span class="kicker">2011</span>
+        <span class="big">SUAT</span>
+        <h3>Terra's unified subscriber system</h3>
+        <p>Sistema Unificado de Assinantes do Terra.</p>
+      </div>
+      <div class="caption"><b>Terra · SUAT</b><span>Project</span></div>
+    </div>
+
+    <div class="pin">
+      <div class="tile c5">
+        <span class="kicker">Since 2009</span>
+        <h3>Visualitica TraderOne</h3>
+        <p>Co-created with André Spritzer and Rodrigo Barni.</p>
+      </div>
+      <div class="caption"><b>Visualitica · TraderOne</b><span>Project</span></div>
+    </div>
+
+    <a class="pin" href="research.html">
+      <div class="tile media">
+        <img src="isosurfaces.jpg" width="1040" height="379" alt="Isosurface meshes of a crystal lattice, a bonsai tree and a CT-scanned backpack">
+      </div>
+      <div class="caption"><b>GPU isosurface extraction</b><span>MSc research, UFRGS · up to 100× faster than CPU →</span></div>
+    </a>
+
+    <a class="pin" href="https://doi.org/10.1111/j.1467-8659.2010.01825.x">
+      <div class="tile c4">
+        <span class="kicker">Computer Graphics Forum · 2010</span>
+        <h3>Efficient and Quality Contouring Algorithms on the GPU</h3>
+        <p>Journal paper, invited from the SIBGRAPI best papers.</p>
+      </div>
+    </a>
+
+    <div class="pin">
+      <div class="tile c0">
+        <span class="kicker">2005</span>
         <h3>Ship for World Youth, 18th edition</h3>
-        <p>One of twelve Brazilians selected by the Cabinet Office, Government of Japan (2005).</p>
+        <p>One of twelve Brazilians selected by the Cabinet Office, Government of Japan.</p>
       </div>
     </div>
-  </section>
 
-  <section>
-    <h2>Languages</h2>
-    <div class="tags">
-      <span>Portuguese · native</span><span>English · advanced</span>
-      <span>German · basic to intermediate</span><span>Japanese · basic</span>
+    <div class="pin">
+      <div class="tile c0">
+        <span class="kicker">Languages</span>
+        <p>Portuguese (native) · English (advanced) · German (basic to intermediate) · Japanese (basic)</p>
+      </div>
     </div>
-  </section>
+
+  </div>
 
 </div>
 <footer>
   <div class="wrap">
-    Brazil · <a href="https://www.linkedin.com/in/leonardoschmitz/">LinkedIn</a> · <a href="https://github.com/leoschmitz">GitHub</a>
+    Leonardo Schmitz · Brazil · <a href="https://www.linkedin.com/in/leonardoschmitz/">LinkedIn</a> · <a href="https://github.com/leoschmitz">GitHub</a>
   </div>
 </footer>
 </body>
