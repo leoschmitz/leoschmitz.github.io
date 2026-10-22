@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research · Leonardo Schmitz</title>
+<meta name="description" content="Leonardo Augusto Schmitz — GPU computing and computer graphics. Research on high-quality, real-time isosurface extraction (UFRGS, 2009).">
+<meta property="og:title" content="Leonardo Schmitz — GPU Isosurface Extraction">
+<meta property="og:description" content="Parallel Dual Contouring and Macet on the GPU: high-quality meshes from large volumes, up to 100× faster than CPU.">
+<meta property="og:image" content="isosurfaces.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="top">
+  <div class="wrap">
+    <a class="home" href="./">Leonardo Schmitz</a>
+    <a class="tab" href="./">About</a>
+    <a class="tab" href="research.html" aria-current="page">Research</a>
+  </div>
+</nav>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Academic research · UFRGS, 2006–2010</p>
+    <h1>Real-time, high-quality isosurfaces on the GPU</h1>
+    <p class="lede">
+      My master's research at UFRGS made high-quality isosurface extraction run at
+      interactive rates on commodity GPUs. It received a SIBGRAPI best paper invitation
+      and was published in Computer Graphics Forum.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="QualityIsosurfaceContouring.pdf">Read the dissertation</a>
+      <a class="btn" href="https://doi.org/10.1111/j.1467-8659.2010.01825.x">CGF 2010 paper</a>
+    </div>
+  </header>
+
+  <figure>
+    <img src="isosurfaces.jpg" width="1040" height="379"
+         alt="Three isosurface meshes: a silicium crystal lattice, a bonsai tree, and a CT scan of a backpack, each with a zoomed wireframe inset">
+    <figcaption>Silicium (Marching Cubes), Bonsai (Macet) and Backpack (Modified Dual Contouring), extracted on the GPU. Datasets from volvis.org.</figcaption>
+  </figure>
+
+  <div class="stats">
+    <div class="stat"><b>100×</b><span>speed-up over CPU versions of Macet and Dual Contouring</span></div>
+    <div class="stat"><b>&lt; 1 s</b><span>to polygonize large volumes, up to 512×512×256 voxels</span></div>
+    <div class="stat"><b>New</b><span>table-driven Dual Contouring, designed for parallel hardware</span></div>
+  </div>
+
+  <section>
+    <h2>The problem</h2>
+    <p>
+      CT and MRI scanners and physics simulations produce huge 3D datasets. To work with them,
+      you often extract an <em>isosurface</em>: a triangle mesh of everything at one density value,
+      such as bone, tissue or a material boundary.
+    </p>
+    <p>
+      The standard algorithm, Marching Cubes, is fast but makes badly shaped triangles and rounds
+      off sharp edges. Methods that fix this were too slow for interactive use on large volumes.
+      My goal was to get both: good mesh quality and real-time speed.
+    </p>
+  </section>
+
+  <section>
+    <h2>What I built</h2>
+    <ul class="points">
+      <li><strong>GPU Macet.</strong> A parallel version of Macet, the Marching Cubes extension that moves grid edges to avoid degenerate, sliver-shaped triangles.</li>
+      <li><strong>Table-driven Dual Contouring.</strong> A new formulation where a lookup table defines quad topology. It is simple, cache-friendly and fits GPU stream expansion with either geometry shaders or Histogram Pyramids.</li>
+      <li><strong>Particle-based feature approximation.</strong> Vertex placement that keeps sharp edges and corners using trilinear interpolation, without the SVD or QR matrix decompositions classic Dual Contouring needs.</li>
+      <li><strong>Hardware analysis.</strong> Profiling with industry GPU tools to find the bottlenecks of isosurface extraction and to evaluate options for future GPU designs.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Publications &amp; material</h2>
+    <div class="pubs">
+      <article class="pub">
+        <div>
+          <span class="kind">Journal</span>
+          <h3>Efficient and Quality Contouring Algorithms on the GPU</h3>
+          <p class="meta">L. Schmitz, L. F. Scheidegger, D. K. Osmari, C. A. Dietrich, J. L. D. Comba · Computer Graphics Forum 29(8), 2010</p>
+        </div>
+        <a class="btn" href="https://doi.org/10.1111/j.1467-8659.2010.01825.x">DOI</a>
+      </article>
+      <article class="pub">
+        <div>
+          <span class="kind">Paper</span>
+          <h3>Efficient and High Quality Contouring of Isosurfaces on Uniform Grids</h3>
+          <p class="meta">L. Schmitz, C. A. Dietrich, J. L. D. Comba · SIBGRAPI 2009 · Best papers selection, invited to Computer Graphics Forum</p>
+        </div>
+      </article>
+      <article class="pub">
+        <div>
+          <span class="kind">Master's thesis</span>
+          <h3>Analysis and Acceleration of High Quality Isosurface Contouring</h3>
+          <p class="meta">UFRGS, Porto Alegre · May 2009 · Advisor: Prof. João L. D. Comba · 78 pages</p>
+        </div>
+        <a class="btn" href="QualityIsosurfaceContouring.pdf">PDF</a>
+      </article>
+      <article class="pub">
+        <div>
+          <span class="kind">Paper</span>
+          <h3>Interactive Isosurface Contouring and High Quality Meshes</h3>
+          <p class="meta">L. A. Schmitz, C. A. Dietrich, J. L. D. Comba · SIBGRAPI 2008</p>
+        </div>
+        <a class="btn" href="SIBGRAPI.pdf">PDF</a>
+      </article>
+      <article class="pub">
+        <div>
+          <span class="kind">Slides</span>
+          <h3>GPU Isosurface Extraction</h3>
+          <p class="meta">Thesis defense presentation · 30 slides</p>
+        </div>
+        <a class="btn" href="gpu_isosurface_extraction.pdf">PDF</a>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Skills shown in this work</h2>
+    <div class="tags">
+      <span>GPU programming</span><span>Shader programming</span><span>Parallel algorithms</span>
+      <span>Computational geometry</span><span>Mesh generation</span><span>Volume visualization</span>
+      <span>Performance profiling</span><span>Scientific writing</span>
+    </div>
+  </section>
+
+</div>
+<footer>
+  <div class="wrap">
+    Computer Graphics Group, Instituto de Informática, Universidade Federal do Rio Grande do Sul (UFRGS).
+    The work dates from 2009; the techniques still apply to anyone working on polygonization.
+  </div>
+</footer>
+</body>
+</html>

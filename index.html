@@ -4,233 +4,107 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Leonardo Schmitz</title>
-<meta name="description" content="Leonardo Augusto Schmitz — GPU computing and computer graphics. Research on high-quality, real-time isosurface extraction (UFRGS, 2009).">
-<meta property="og:title" content="Leonardo Schmitz — GPU Isosurface Extraction">
-<meta property="og:description" content="Parallel Dual Contouring and Macet on the GPU: high-quality meshes from large volumes, up to 100× faster than CPU.">
+<meta name="description" content="Leonardo Schmitz: Staff Software Engineer at Pinterest, with deep experience leading development of internal systems. Background in GPU computing and computer graphics.">
+<meta property="og:title" content="Leonardo Schmitz">
+<meta property="og:description" content="Staff Software Engineer at Pinterest. Background in GPU computing and computer graphics research.">
 <meta property="og:image" content="isosurfaces.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #fbfaf8;
-    --surface: #ffffff;
-    --text: #1c1d1f;
-    --muted: #5f6368;
-    --line: #e6e3de;
-    --accent: #2457c5;
-    --accent-soft: #e8eefb;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #121315;
-      --surface: #1b1c1f;
-      --text: #ececec;
-      --muted: #a2a6ad;
-      --line: #2c2e33;
-      --accent: #7fa6ff;
-      --accent-soft: #1f2a44;
-    }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 17px/1.65 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-
-  header { padding: 72px 0 40px; }
-  .eyebrow {
-    font-size: 13px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--accent); margin: 0 0 12px;
-  }
-  h1 {
-    font-family: "Source Serif 4", Georgia, serif; font-weight: 600;
-    font-size: clamp(36px, 6vw, 54px); line-height: 1.1; margin: 0 0 18px;
-    letter-spacing: -.01em;
-  }
-  .lede { font-size: 20px; color: var(--muted); max-width: 640px; margin: 0 0 28px; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 15px;
-    border: 1px solid var(--line); color: var(--text); background: var(--surface);
-  }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  @media (prefers-color-scheme: dark) { .btn.primary { color: #0e1320; } }
-  .btn:hover { text-decoration: none; filter: brightness(1.05); }
-
-  figure { margin: 0 0 56px; }
-  figure img {
-    width: 100%; height: auto; display: block; border-radius: 12px;
-    background: #fff; border: 1px solid var(--line);
-  }
-  figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; }
-
-  .stats {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0 0 64px;
-  }
-  .stat {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-    padding: 20px;
-  }
-  .stat b {
-    display: block; font-family: "Source Serif 4", Georgia, serif;
-    font-size: 34px; line-height: 1.1; margin-bottom: 6px;
-  }
-  .stat span { font-size: 14px; color: var(--muted); }
-
-  section { margin: 0 0 64px; }
-  h2 {
-    font-family: "Source Serif 4", Georgia, serif; font-weight: 600;
-    font-size: 28px; margin: 0 0 16px;
-  }
-  p { margin: 0 0 16px; }
-  ul.points { padding: 0; margin: 0; list-style: none; }
-  ul.points li {
-    position: relative; padding-left: 26px; margin-bottom: 14px;
-  }
-  ul.points li::before {
-    content: ""; position: absolute; left: 4px; top: .62em;
-    width: 8px; height: 8px; border-radius: 2px; background: var(--accent);
-  }
-
-  .pubs { display: grid; gap: 16px; }
-  .pub {
-    display: grid; grid-template-columns: 1fr auto; gap: 8px 24px; align-items: center;
-    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-    padding: 20px 22px;
-  }
-  .pub .kind {
-    font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--accent); background: var(--accent-soft); border-radius: 999px;
-    padding: 3px 10px; display: inline-block; margin-bottom: 8px;
-  }
-  .pub h3 { margin: 0 0 4px; font-size: 18px; line-height: 1.35; }
-  .pub .meta { font-size: 14px; color: var(--muted); margin: 0; }
-
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .tags span {
-    font-size: 14px; padding: 5px 12px; border-radius: 999px;
-    border: 1px solid var(--line); background: var(--surface);
-  }
-
-  footer {
-    border-top: 1px solid var(--line); padding: 28px 0 48px;
-    font-size: 14px; color: var(--muted);
-  }
-
-  @media (max-width: 640px) {
-    body { font-size: 16px; }
-    header { padding: 48px 0 32px; }
-    .lede { font-size: 18px; }
-    .stats { grid-template-columns: 1fr; }
-    .pub { grid-template-columns: 1fr; }
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<nav class="top">
+  <div class="wrap">
+    <a class="home" href="./">Leonardo Schmitz</a>
+    <a class="tab" href="./" aria-current="page">About</a>
+    <a class="tab" href="research.html">Research</a>
+  </div>
+</nav>
 <div class="wrap">
 
   <header>
-    <p class="eyebrow">GPU computing · Computer graphics</p>
-    <h1>Leonardo Augusto Schmitz</h1>
+    <p class="eyebrow">Staff Software Engineer · Pinterest</p>
+    <h1>Leonardo Schmitz</h1>
     <p class="lede">
-      I turn heavy geometric algorithms into fast parallel ones. My graduate research
-      made high-quality isosurface extraction run at interactive rates on commodity GPUs.
+      Staff Software Engineer with deep experience leading development of internal systems.
+      I started out in computer graphics research, making geometry algorithms run fast on GPUs,
+      and moved on to building production systems.
     </p>
     <div class="actions">
-      <a class="btn primary" href="QualityIsosurfaceContouring.pdf">Read the dissertation</a>
-      <a class="btn" href="https://www.linkedin.com/in/leonardoschmitz/">LinkedIn</a>
+      <a class="btn primary" href="https://www.linkedin.com/in/leonardoschmitz/">LinkedIn</a>
       <a class="btn" href="https://github.com/leoschmitz">GitHub</a>
+      <a class="btn" href="research.html">Research</a>
     </div>
   </header>
 
-  <figure>
-    <img src="isosurfaces.jpg" width="1040" height="379"
-         alt="Three isosurface meshes: a silicium crystal lattice, a bonsai tree, and a CT scan of a backpack, each with a zoomed wireframe inset">
-    <figcaption>Silicium (Marching Cubes), Bonsai (Macet) and Backpack (Modified Dual Contouring), extracted on the GPU. Datasets from volvis.org.</figcaption>
-  </figure>
-
-  <div class="stats">
-    <div class="stat"><b>100×</b><span>speed-up over CPU versions of Macet and Dual Contouring</span></div>
-    <div class="stat"><b>&lt; 1 s</b><span>to polygonize large volumes, up to 512×512×256 voxels</span></div>
-    <div class="stat"><b>New</b><span>table-driven Dual Contouring, designed for parallel hardware</span></div>
-  </div>
-
   <section>
-    <h2>The problem</h2>
-    <p>
-      CT and MRI scanners and physics simulations produce huge 3D datasets. To work with them,
-      you often extract an <em>isosurface</em>: a triangle mesh of everything at one density value,
-      such as bone, tissue or a material boundary.
-    </p>
-    <p>
-      The standard algorithm, Marching Cubes, is fast but makes badly shaped triangles and rounds
-      off sharp edges. Methods that fix this were too slow for interactive use on large volumes.
-      My goal was to get both: good mesh quality and real-time speed.
-    </p>
-  </section>
-
-  <section>
-    <h2>What I built</h2>
-    <ul class="points">
-      <li><strong>GPU Macet.</strong> A parallel version of Macet, the Marching Cubes extension that moves grid edges to avoid degenerate, sliver-shaped triangles.</li>
-      <li><strong>Table-driven Dual Contouring.</strong> A new formulation where a lookup table defines quad topology. It is simple, cache-friendly and fits GPU stream expansion with either geometry shaders or Histogram Pyramids.</li>
-      <li><strong>Particle-based feature approximation.</strong> Vertex placement that keeps sharp edges and corners using trilinear interpolation, without the SVD or QR matrix decompositions classic Dual Contouring needs.</li>
-      <li><strong>Hardware analysis.</strong> Profiling with industry GPU tools to find the bottlenecks of isosurface extraction and to evaluate options for future GPU designs.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Publications &amp; material</h2>
-    <div class="pubs">
-      <article class="pub">
+    <h2>Selected work</h2>
+    <div class="timeline">
+      <div class="row">
+        <div class="when">Now</div>
         <div>
-          <span class="kind">Master's thesis</span>
-          <h3>Analysis and Acceleration of High Quality Isosurface Contouring</h3>
-          <p class="meta">UFRGS, Porto Alegre · May 2009 · Advisor: Prof. João L. D. Comba · 78 pages</p>
+          <h3>Pinterest</h3>
+          <p>Staff Software Engineer.</p>
         </div>
-        <a class="btn" href="QualityIsosurfaceContouring.pdf">PDF</a>
-      </article>
-      <article class="pub">
+      </div>
+      <div class="row">
+        <div class="when">2012–2013</div>
         <div>
-          <span class="kind">Paper</span>
-          <h3>Interactive Isosurface Contouring and High Quality Meshes</h3>
-          <p class="meta">L. A. Schmitz, C. A. Dietrich, J. L. D. Comba · SIBGRAPI 2008</p>
+          <h3>Walmart · Food Safety</h3>
+          <p>Food safety project, with Bruno Meybom Pospichil, Fernando Coelho and Fausto Richetti Blanco.</p>
         </div>
-        <a class="btn" href="SIBGRAPI.pdf">PDF</a>
-      </article>
-      <article class="pub">
+      </div>
+      <div class="row">
+        <div class="when">2011–2012</div>
         <div>
-          <span class="kind">Slides</span>
-          <h3>GPU Isosurface Extraction</h3>
-          <p class="meta">Thesis defense presentation · 30 slides</p>
+          <h3>Terra · Subscriber platform</h3>
+          <p>SUAT, Terra's unified subscriber system, and the integration that sends subscriber email through a third-party web service.</p>
         </div>
-        <a class="btn" href="gpu_isosurface_extraction.pdf">PDF</a>
-      </article>
+      </div>
+      <div class="row">
+        <div class="when">Since 2009</div>
+        <div>
+          <h3>Visualitica · TraderOne</h3>
+          <p>Co-created TraderOne with André Spritzer and Rodrigo Barni.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">2006–2009</div>
+        <div>
+          <h3>UFRGS · Computer Graphics Group</h3>
+          <p>MSc in Computer Science. GPU isosurface extraction, published in Computer Graphics Forum. <a href="research.html">See the research →</a></p>
+        </div>
+      </div>
     </div>
   </section>
 
   <section>
-    <h2>Skills shown in this work</h2>
+    <h2>Recognition</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>SIBGRAPI best papers</h3>
+        <p>One of three computer graphics papers selected and invited to Computer Graphics Forum.</p>
+      </div>
+      <div class="card">
+        <h3>Ship for World Youth, 18th edition</h3>
+        <p>One of twelve Brazilians selected by the Cabinet Office, Government of Japan (2005).</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Languages</h2>
     <div class="tags">
-      <span>GPU programming</span><span>Shader programming</span><span>Parallel algorithms</span>
-      <span>Computational geometry</span><span>Mesh generation</span><span>Volume visualization</span>
-      <span>Performance profiling</span><span>Scientific writing</span>
+      <span>Portuguese · native</span><span>English · advanced</span>
+      <span>German · basic to intermediate</span><span>Japanese · basic</span>
     </div>
   </section>
 
 </div>
 <footer>
   <div class="wrap">
-    Computer Graphics Group, Instituto de Informática, Universidade Federal do Rio Grande do Sul (UFRGS).
-    The work dates from 2009; the techniques still apply to anyone working on polygonization.
+    Brazil · <a href="https://www.linkedin.com/in/leonardoschmitz/">LinkedIn</a> · <a href="https://github.com/leoschmitz">GitHub</a>
   </div>
 </footer>
 </body>
